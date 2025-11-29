@@ -1,11 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 // import Home from './pages/Home';
-import LoginPage from './pages/login-page/login-page';
+import LoginPage from "./pages/login-page/login-page";
 // import LoginPage from './pages/Login';
 // import CreateLink from './pages/CreateLink';
 // import ClientePage from './pages/Client';
 // import PrivateRoute from './shared/utils/privateRoute';
-
 
 function App() {
   return (

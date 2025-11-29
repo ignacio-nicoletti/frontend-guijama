@@ -1,4 +1,5 @@
 import React from "react";
+import { Navbar } from "../navbar/navbar";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -6,7 +7,12 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <section className=" min-h-screen flex  p-4 overflow-hidden scroll-hidden">{children}</section>
+    <>
+      <Navbar />
+      <section className=" min-h-screen flex  overflow-hidden min-w-full scroll-hidden">
+        {children}
+      </section>
+    </>
   );
 };
 
