@@ -4,7 +4,7 @@ export const Navbar = () => {
   return (
     <div
       className="flex w-full h-20 px-5  justify-between items-center"
-      style={{ backgroundImage: "url('./src/assets/backgroundNavbar.svg')" }}
+      style={{ backgroundImage: "url('../src/assets/backgroundNavbar.svg')" }}
     >
       <div>
         <img src="./src/assets/guijama.svg" alt="" className="w-30 " />
