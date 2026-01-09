@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import Layout from "../../../components/layout/layout";
-import { SubNavbarItem } from "../../../components/sub-navbar-items/sub-navbar-item";
 import { GenericSkeleton } from "../../../components/skeletons/generic-skeleton";
+import { SubNavbarItem } from "../../../components/sub-navbar-items/sub-navbar-item";
 import { ProductList } from "./components/product-list";
 
 export function ProductPage() {
@@ -13,9 +13,7 @@ export function ProductPage() {
       >
         <SubNavbarItem />
         <div className="bg-secondary w-full text-center py-2">
-          <p className="text-3xl text-white font-semibold">
-            Listado de productos
-          </p>
+          <p className="text-3xl text-white font-semibold">Listado de productos</p>
         </div>
 
         <Suspense fallback={<GenericSkeleton />}>
