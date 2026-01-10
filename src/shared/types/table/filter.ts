@@ -8,6 +8,8 @@ export type Filter = {
 export type FilterProductSearch = {
   brandId?: string;
   categoryId?: string;
+  code?: string;
+  title?: string;
 };
 
 export interface PaginatedResponse<T> {

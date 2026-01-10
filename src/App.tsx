@@ -1,46 +1,67 @@
 import { Route, Routes } from "react-router-dom";
+import {
+  ClientsPage,
+  ConfigurationPage,
+  ProductPage,
+  SellsPage,
+  SupplierPage,
+} from "./pages/admin";
 import LoginPage from "./pages/login-page/login-page";
-import { ClientsPage, ProductPage, SellsPage, SupplierPage } from "./pages/admin";
-// import Home from './pages/Home';
-
-// import LoginPage from './pages/Login';
-// import CreateLink from './pages/CreateLink';
-
-// import PrivateRoute from './shared/utils/privateRoute';
+import { AuthRedirect } from "./shared/utils/auth-redirect";
+import PrivateRoute from "./shared/utils/privateRoute";
 
 function App() {
   return (
     <Routes>
-     
+      {/* 👇 decide a dónde ir */}
+      <Route path="/" element={<AuthRedirect />} />
+
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/admin/clients" element={<ClientsPage />} />
-      <Route path="/admin/products" element={<ProductPage />} />
-      <Route path="/admin/sells" element={<SellsPage />} />
-      <Route path="/admin/suppliers" element={<SupplierPage />} />
 
-      {/* <Route
-        path="/"
+      <Route
+        path="/admin/products"
         element={
           <PrivateRoute>
-            <Home />
+            <ProductPage />
           </PrivateRoute>
         }
       />
 
       <Route
-        path="/crear-link"
+        path="/admin/clients"
         element={
           <PrivateRoute>
-            <CreateLink />
+            <ClientsPage />
           </PrivateRoute>
         }
       />
 
       <Route
-        path="/cliente/:id"
-        element={<ClientePage />}
+        path="/admin/sells"
+        element={
+          <PrivateRoute>
+            <SellsPage />
+          </PrivateRoute>
+        }
       />
-       */}
+
+      <Route
+        path="/admin/suppliers"
+        element={
+          <PrivateRoute>
+            <SupplierPage />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/admin/configuration"
+        element={
+          <PrivateRoute>
+            <ConfigurationPage />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 }

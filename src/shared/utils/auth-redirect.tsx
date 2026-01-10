@@ -1,19 +1,17 @@
-import { JSX } from "react";
+// src/shared/routes/auth-redirect.tsx
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../hooks/stores/auth.store";
 
-const PrivateRoute = ({ children }: { children: JSX.Element }) => {
+export const AuthRedirect = () => {
   const { isAuthenticated, isLoading } = useAuthStore();
 
   if (isLoading) {
     return <div>Cargando...</div>;
   }
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
+  return isAuthenticated ? (
+    <Navigate to="/admin/products" replace />
+  ) : (
+    <Navigate to="/login" replace />
+  );
 };
-
-export default PrivateRoute;

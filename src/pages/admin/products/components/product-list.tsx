@@ -8,7 +8,7 @@ export const ProductList = () => {
   const { filters } = useProductFilters();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 px-8">
       {/* 🔥 Suspense para los filtros */}
       {/* <ErrorBoundary fallback={<div>❌ Error cargando filtros</div>}> */}
       <Suspense fallback={<div>Cargando filtros...</div>}>
