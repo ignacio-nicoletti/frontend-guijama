@@ -1,5 +1,5 @@
-export type { Brand } from "./brand/brand";
-export type { Category } from "./category/category";
+export type { Brand, BrandResponse } from "./brand/brand";
+export type { Category, CategoryResponse } from "./category/category";
 export type { CustomError } from "./error/custom-error";
 export type { Filter, FilterProductSearch, PaginatedResponse } from "./table/filter";
 

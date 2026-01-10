@@ -1,51 +1,90 @@
-// hooks/use-products.ts
-import { mutateEntity } from "../../../lib/api-utils/fetch-entities";
+// frontend/src/hooks/use-products.ts
+import { useQuery } from "@tanstack/react-query";
+import { fetchEntities } from "../../../lib";
 import type { FilterProductSearch, Product } from "../../../types";
 import { buildQueryString } from "../../../utils/query-params";
-import { useSuspenseApiFetch } from "../use-suspense-api-fetch";
+import { useSuspenseQueryFetch } from "../use-api-fetch";
 
+// Versión REGULAR (sin suspense) - para componentes que no quieren suspense
+export const useGetAllProducts = (filters: FilterProductSearch) => {
+  const queryString = buildQueryString(filters);
+  const resourceUrl = queryString ? `product/?${queryString}` : "product";
+
+  const { data, isLoading, isError, error, refetch } = useQuery<Product[], Error>({
+    queryKey: ["products", queryString],
+    queryFn: async () => {
+      console.log("🔍 Buscando productos en:", resourceUrl);
+      try {
+        const result = await fetchEntities<Product[]>(resourceUrl, undefined);
+        console.log("✅ Productos encontrados:", result?.length || 0);
+        return result;
+      } catch (err) {
+        console.error("❌ Error buscando productos:", err);
+        throw err;
+      }
+    },
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    retry: 1,
+  });
+
+  return {
+    products: data || [],
+    isLoading,
+    isError,
+    error,
+    refetch,
+  };
+};
+
+// Versión SUSPENSE - para componentes que SÍ quieren usar suspense
 export const useSuspenseGetAllProducts = (filters: FilterProductSearch) => {
   const queryString = buildQueryString(filters);
   const resourceUrl = queryString ? `product/?${queryString}` : "product";
 
-  const { entity, isLoading, error, refetch } = useSuspenseApiFetch<Product[]>({
+  const { data, isLoading, error, refetch } = useSuspenseQueryFetch<Product[]>(
+    ["products", queryString],
     resourceUrl,
-    queryKey: ["products", queryString],
-  });
+    undefined,
+    {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+    }
+  );
 
   return {
-    products: entity,
+    products: data || [],
     isLoading,
     error,
     refetch,
   };
 };
 
-export const useSuspenseGetProductById = (id: string) => {
-  const { entity, isLoading, error } = useSuspenseApiFetch<Product>({
-    resourceUrl: `product/${id}`,
-    queryKey: ["product", id],
-  });
-
-  return {
-    product: entity,
-    isLoading,
-    error,
-  };
-};
-
-// Hook para mutaciones (sin suspense)
+// Hook para mutaciones
 export const useProductMutations = () => {
   const createProduct = async (productData: Omit<Product, "id">) => {
-    return mutateEntity<Product>("product", "POST", productData);
+    return fetch(`http://localhost:3000/api/product`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(productData),
+    }).then((res) => res.json());
   };
 
   const updateProduct = async (id: string, productData: Partial<Product>) => {
-    return mutateEntity<Product>(`product/${id}`, "PUT", productData);
+    return fetch(`http://localhost:3000/api/product/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify(productData),
+    }).then((res) => res.json());
   };
 
   const deleteProduct = async (id: string) => {
-    return mutateEntity<void>(`product/${id}`, "DELETE");
+    return fetch(`http://localhost:3000/api/product/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    }).then((res) => res.json());
   };
 
   return {

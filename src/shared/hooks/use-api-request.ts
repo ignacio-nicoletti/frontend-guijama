@@ -53,7 +53,7 @@ export const useApiRequest = <T, R = unknown>() => {
           "Content-Type": "application/json",
           // Authorization: `Bearer ${token}`,
         };
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const apiUrl = import.meta.env.VITE_BACK_URL;
         const response = await fetch(`${apiUrl}${endpoint}`, {
           method,
           headers: headers,

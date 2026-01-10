@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 
 import { CustomCard } from "@/components/card/custom-card";
 import { SearchCombobox } from "@/components/form/search-combobox/search-combobox";
-import { useSuspenseGetAllActiveBrands } from "@/shared/hooks/query/brand/use-suspense-get-all-active";
-import { useSuspenseGetAllActiveCategory } from "@/shared/hooks/query/category/use-suspense-get-all-active-category";
+import { useGetAllBrands } from "@/shared/hooks/query/brand/use-suspense-get-all-active";
+import { useGetAllCategory } from "@/shared/hooks/query/category/use-suspense-get-all-category";
 import {
   FilterProductFormType,
   filterProductSchema,
@@ -18,8 +18,8 @@ import { Form } from "../../ui/form";
 
 export const ProductFiltersForm = () => {
   const { filters, setFilters, clearFilters } = useProductFilters();
-  const { brands } = useSuspenseGetAllActiveBrands();
-  const { categories } = useSuspenseGetAllActiveCategory();
+  const { brands } = useGetAllBrands();
+  const { categories } = useGetAllCategory();
 
   const form = useForm<FilterProductFormType>({
     resolver: zodResolver(filterProductSchema),

@@ -9,7 +9,14 @@ export const ProductList = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <ProductFiltersForm />
+      {/* 🔥 Suspense para los filtros */}
+      {/* <ErrorBoundary fallback={<div>❌ Error cargando filtros</div>}> */}
+      <Suspense fallback={<div>Cargando filtros...</div>}>
+        <ProductFiltersForm />
+      </Suspense>
+      {/* </ErrorBoundary> */}
+
+      {/* 🔥 Suspense independiente para la tabla */}
       {filters && (
         <Suspense fallback={<TableSkeleton columns={5} rows={8} />}>
           <ProductTable filters={filters} />

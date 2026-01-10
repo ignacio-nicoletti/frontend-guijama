@@ -1,11 +1,16 @@
-import { Category } from "@/shared/types";
-import { useSuspenseApiFetch } from "../use-suspense-api-fetch";
+import { fetchEntities } from "@/shared/lib";
+import { CategoryResponse } from "@/shared/types";
+import { useQuery } from "@tanstack/react-query";
 
-export const useSuspenseGetAllCategory = () => {
-  const { entity, isLoading, error } = useSuspenseApiFetch<Category[]>({
-    resourceUrl: "category",
-    queryKey: ["categories"],
+export function useGetAllCategory() {
+  const query = useQuery({
+    queryKey: ["category"],
+    queryFn: () => fetchEntities<CategoryResponse>("category"),
   });
 
-  return { categories: entity, isLoading, error };
-};
+  return {
+    categories: query.data?.data.categories ?? [],
+    isLoading: query.isLoading,
+    error: query.error,
+  };
+}

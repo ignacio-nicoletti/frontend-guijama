@@ -27,7 +27,10 @@
       "@shared/*": ["src/shared/*"],
       "@shared/types": ["src/shared/types"],
       "@shared/types/*": ["src/shared/types/*"]
-    }
+    },
+    
+ 
+   "types": ["vite/client", "node"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

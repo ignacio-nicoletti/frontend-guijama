@@ -3,7 +3,7 @@ import { options } from "./lib";
 export const Navbar = () => {
   return (
     <div
-      className="flex w-full h-20 px-5  justify-between items-center"
+      className="flex w-full h-20 px-5 justify-between items-center"
       style={{ backgroundImage: "url('../src/assets/backgroundNavbar.svg')" }}
     >
       <div>

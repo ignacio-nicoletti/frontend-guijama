@@ -1,38 +1,21 @@
-// use-suspense-api-fetch.ts (modificado)
+import { fetchEntities } from "@/shared/lib";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { fetchEntities } from "../../lib";
 
-type UseSuspenseApiFetchOptions<T> = {
+interface UseSuspenseApiFetchOptions<T, R> {
   resourceUrl: string;
-  queryKey: string[];
-  queryParams?: Record<string, string>;
-  select?: (data: T) => T;
-  staleTime?: number;
-  gcTime?: number;
-};
+  queryKey: readonly unknown[];
+  queryParams?: Record<string, string | number | boolean>;
+  select?: (data: T) => R;
+}
 
-type UseSuspenseApiFetchReturn<T> = {
-  entity: T;
-  isLoading: boolean;
-  error: Error | null;
-  refetch: () => Promise<unknown>;
-};
-
-export const useSuspenseApiFetch = <T>(
-  options: UseSuspenseApiFetchOptions<T>
-): UseSuspenseApiFetchReturn<T> => {
-  const { data, isLoading, error, refetch } = useSuspenseQuery({
+export const useSuspenseApiFetch = <T, R = T>(options: UseSuspenseApiFetchOptions<T, R>) => {
+  const { data } = useSuspenseQuery({
     queryKey: options.queryKey,
-    queryFn: async (): Promise<T> => fetchEntities<T>(options.resourceUrl, options.queryParams),
+    queryFn: () => fetchEntities<T>(options.resourceUrl),
     select: options.select,
-    staleTime: options.staleTime,
-    gcTime: options.gcTime,
   });
 
   return {
-    entity: data,
-    isLoading: isLoading,
-    error: error,
-    refetch: refetch,
+    entity: data as R,
   };
 };

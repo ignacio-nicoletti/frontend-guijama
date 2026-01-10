@@ -1,49 +1,18 @@
-// fetch-entities.ts (modificado)
-import { fetchWithAuth } from "./fetch-base";
+// src/shared/lib/fetch-entities.ts
+export async function fetchEntities<T>(resource: string): Promise<T> {
+  const url = `http://localhost:3000/api/v1/${resource}`;
 
-export const fetchEntities = async <T>(
-  resourceUrl: string,
-  queryParams?: Record<string, string>
-): Promise<T> => {
-  try {
-    const response = await fetchWithAuth({
-      resourceUrl,
-      queryParams,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  console.log("🌐 Fetching:", url);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data as T;
-  } catch (error) {
-    console.error("Error fetching entities:", error);
-    throw error;
-  }
-};
-
-// Función para mutaciones (POST, PUT, DELETE, PATCH)
-export const mutateEntity = async <T>(
-  resourceUrl: string,
-  method: "POST" | "PUT" | "DELETE" | "PATCH",
-  data?: unknown
-): Promise<T> => {
-  const response = await fetchWithAuth({
-    resourceUrl,
-    method,
+  const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
     },
-    body: data,
   });
 
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new Error(`HTTP error ${response.status}`);
   }
 
-  return await response.json();
-};
+  return response.json();
+}

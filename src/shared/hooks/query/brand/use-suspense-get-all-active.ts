@@ -1,11 +1,16 @@
-import { Brand } from "@/shared/types";
-import { useSuspenseApiFetch } from "../use-suspense-api-fetch";
+import { fetchEntities } from "@/shared/lib";
+import { BrandResponse } from "@/shared/types";
+import { useQuery } from "@tanstack/react-query";
 
-export const useSuspenseGetAllActiveBrands = () => {
-  const { entity, isLoading, error } = useSuspenseApiFetch<Brand[]>({
-    resourceUrl: "brand",
-    queryKey: ["brands", "active"],
+export function useGetAllBrands() {
+  const query = useQuery({
+    queryKey: ["brands"],
+    queryFn: () => fetchEntities<BrandResponse>("brand"),
   });
 
-  return { brands: entity, isLoading, error };
-};
+  return {
+    brands: query.data?.data.brands ?? [],
+    isLoading: query.isLoading,
+    error: query.error,
+  };
+}
