@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import ConfigurationLayout from "./components/layout/configuration-layout";
 import {
   ClientsPage,
   ConfigurationPage,
@@ -6,6 +7,12 @@ import {
   SellsPage,
   SupplierPage,
 } from "./pages/admin";
+import {
+  ConfigurationBrandPage,
+  ConfigurationCategoryPage,
+  ConfigurationClientPage,
+  ConfigurationSupplierPage,
+} from "./pages/admin/configuration";
 import LoginPage from "./pages/login-page/login-page";
 import { AuthRedirect } from "./shared/utils/auth-redirect";
 import PrivateRoute from "./shared/utils/privateRoute";
@@ -54,14 +61,13 @@ function App() {
         }
       />
 
-      <Route
-        path="/admin/configuration"
-        element={
-          <PrivateRoute>
-            <ConfigurationPage />
-          </PrivateRoute>
-        }
-      />
+      <Route path="/admin/configuration" element={<ConfigurationLayout />}>
+        <Route index element={<ConfigurationPage />} />
+        <Route path="brand" element={<ConfigurationBrandPage />} />
+        <Route path="category" element={<ConfigurationCategoryPage />} />
+        <Route path="supplier" element={<ConfigurationSupplierPage />} />
+        <Route path="client" element={<ConfigurationClientPage />} />
+      </Route>
     </Routes>
   );
 }
