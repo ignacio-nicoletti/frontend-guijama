@@ -2,24 +2,19 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 
-import { TableSortableHeader } from "../components/table-sortable-header";
+import { useNavigate } from "react-router-dom";
+import type { Brand, Product } from "../../../shared/types";
 import { Button } from "../../ui/button";
-import type { Product, Category, Brand } from "../../../shared/types";
+import { TableSortableHeader } from "../components/table-sortable-header";
 
 export const buildColumns = (): ColumnDef<Product>[] => [
   {
-    accessorKey: "category",
+    accessorKey: "code",
     header: ({ column }) => {
       return (
         <div className="flex justify-start">
-          <TableSortableHeader column={column} title="Rubro" />
+          <TableSortableHeader column={column} title="Código" />
         </div>
-      );
-    },
-    cell: ({ row }) => {
-      const category: Category = row.getValue("category");
-      return (
-        <div className="text-start pl-4">{category ? category.name : ""}</div>
       );
     },
   },
@@ -38,40 +33,78 @@ export const buildColumns = (): ColumnDef<Product>[] => [
     },
   },
   {
-    accessorKey: "description",
+    accessorKey: "title",
     header: ({ column }) => {
       return (
         <div className="flex justify-start">
-          <TableSortableHeader column={column} title="Descripción" />
+          <TableSortableHeader column={column} title="Titulo" />
+        </div>
+      );
+    },
+    cell: ({ row }) => <div className="capitalize text-start pl-8">{row.getValue("title")}</div>,
+  },
+  {
+    accessorKey: "priceCost",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Precio Costo" />
         </div>
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize text-start pl-8">
-        {row.getValue("description")}
-      </div>
+      <div className="capitalize text-start pl-8">{row.getValue("priceCost")} $</div>
     ),
   },
   {
-    accessorKey: "fullCode",
+    accessorKey: "priceList",
     header: ({ column }) => {
       return (
         <div className="flex justify-start">
-          <TableSortableHeader column={column} title="Código" />
+          <TableSortableHeader column={column} title="Precio Lista" />
         </div>
       );
     },
+    cell: ({ row }) => (
+      <div className="capitalize text-start pl-8">{row.getValue("priceList")} $</div>
+    ),
+  },
+  {
+    accessorKey: "priceX10",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Precio X10" />
+        </div>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize text-start pl-8">{row.getValue("priceX10")} $</div>
+    ),
+  },
+  {
+    accessorKey: "priceX100",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Precio X100" />
+        </div>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize text-start pl-8">{row.getValue("priceX100")} $</div>
+    ),
   },
 
   {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-    //   const router = useRouter();
-    //   const product = row.original;
+      const router = useNavigate();
+      const product = row.original;
 
       const handleEdit = () => {
-        // router.push(`/product/edit/${product.id}`);
+        router(`/admin/product/edit/${product.id}`);
       };
 
       return (
@@ -79,12 +112,11 @@ export const buildColumns = (): ColumnDef<Product>[] => [
           <Button
             size={"icon"}
             variant={"outline"}
-            asChild
             title="Editar"
-            className="p-2 cursor-pointer"
+            className="p-2 cursor-pointer hover:bg-gray-100"
             onClick={handleEdit}
           >
-            <Pencil />
+            <Pencil size={16} />
           </Button>
         </div>
       );

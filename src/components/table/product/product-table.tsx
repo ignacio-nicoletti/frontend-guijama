@@ -7,7 +7,6 @@ import { buildColumns } from "./product-columns";
 export const ProductTable = ({ filters }: { filters: FilterProductSearch }) => {
   const columns = buildColumns();
   const { products } = useGetAllProducts();
-
-  const filterTable: Filter[] = [{ by: "description", display: "Descripción", type: "input" }];
+  const filterTable: Filter[] = [{ by: "title", display: "Titulo", type: "input" }];
   return <DataTable columns={columns} data={products ?? []} filters={filterTable} />;
 };
