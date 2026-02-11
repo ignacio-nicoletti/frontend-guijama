@@ -2,12 +2,12 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Pencil } from "lucide-react";
 
-import { Client } from "@/shared/types/client/client";
+import { Supplier } from "@/shared/types/sell/sell";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../ui/button";
 import { TableSortableHeader } from "../components/table-sortable-header";
 
-export const buildClientColumns = (): ColumnDef<Client>[] => [
+export const buildSupplierColumns = (): ColumnDef<Supplier>[] => [
   {
     accessorKey: "firstName",
     header: ({ column }) => {

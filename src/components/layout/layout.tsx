@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       {pathname !== "/admin/configuration" && <Navbar />}
-      <section className=" min-h-screen flex  overflow-hidden min-w-full scroll-hidden">
+      <section className=" min-h-screen flex  overflow-hidden min-w-full scroll-hidden mb-4">
         {children}
       </section>
     </>

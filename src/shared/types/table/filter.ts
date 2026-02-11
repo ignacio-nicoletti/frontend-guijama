@@ -17,6 +17,11 @@ export type FilterClientSearch = {
   lastName?: string;
 };
 
+export type FilterSellSearch = {
+  firstName?: string;
+  lastName?: string;
+};
+
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;

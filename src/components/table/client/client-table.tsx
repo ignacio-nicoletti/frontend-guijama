@@ -8,7 +8,6 @@ import { buildClientColumns } from "./client-columns";
 export const ClientTable = ({ filters }: { filters: FilterClientSearch }) => {
   const columns = buildClientColumns();
   const { clients } = useGetAllClients();
-  console.log(clients);
 
   const filterTable: Filter[] = [{ by: "title", display: "Titulo", type: "input" }];
   return <DataTable columns={columns} data={clients ?? []} filters={filterTable} />;

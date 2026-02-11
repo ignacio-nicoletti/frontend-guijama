@@ -1,6 +1,7 @@
 "use client";
 import { ArrowLeft } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
 import { CustomButton } from "../form/button/custom-button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
@@ -19,13 +20,13 @@ export const CustomCard = ({
   onButtonClick,
   className,
 }: CardProps) => {
-  // const router = useRouter();
+  const navigate = useNavigate();
 
   const handleClick = () => {
     if (onButtonClick) {
       onButtonClick();
     } else {
-      // router.back();
+      () => navigate(-1);
     }
   };
   return (
