@@ -8,7 +8,8 @@ import { buildSupplierColumns } from "./supplier-columns";
 export const SupplierTable = ({ filters }: { filters: FilterSellSearch }) => {
   const columns = buildSupplierColumns();
   const { suppliers } = useGetAllSuppliers();
+  console.log(suppliers);
 
-  const filterTable: Filter[] = [{ by: "title", display: "Titulo", type: "input" }];
+  const filterTable: Filter[] = [];
   return <DataTable columns={columns} data={suppliers ?? []} filters={filterTable} />;
 };

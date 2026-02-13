@@ -10,7 +10,7 @@ import { useSuspenseQueryFetch } from "../use-api-fetch";
 export const useGetAllSuppliers = () => {
   const query = useQuery({
     queryKey: ["suppliers"],
-    queryFn: () => fetchEntities<SupplierResponse>("suppliers"),
+    queryFn: () => fetchEntities<SupplierResponse>("supplier"),
   });
   return {
     suppliers: query.data?.data.suppliers ?? [],

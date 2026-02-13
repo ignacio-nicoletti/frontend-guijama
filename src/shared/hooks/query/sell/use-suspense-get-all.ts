@@ -1,5 +1,6 @@
 // frontend/src/hooks/use-products.ts
-import { SellsResponse, Supplier } from "@/shared/types/sell/sell";
+import { Supplier } from "@/shared/types/sell/sell";
+import { SellsResponse } from "@/shared/types/supplier/sell";
 import { FilterSellSearch } from "@/shared/types/table/filter";
 import { useQuery } from "@tanstack/react-query";
 import { fetchEntities } from "../../../lib";

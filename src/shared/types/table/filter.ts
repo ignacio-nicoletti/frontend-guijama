@@ -5,18 +5,6 @@ export type Filter = {
   display: string;
 };
 
-export type FilterProductSearch = {
-  brandId?: string;
-  categoryId?: string;
-  code?: string;
-  title?: string;
-};
-
-export type FilterClientSearch = {
-  firstName?: string;
-  lastName?: string;
-};
-
 export type FilterSellSearch = {
   firstName?: string;
   lastName?: string;
