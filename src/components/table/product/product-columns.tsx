@@ -19,6 +19,45 @@ export const buildColumns = (): ColumnDef<Product>[] => [
     },
   },
   {
+    accessorKey: "title",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Titulo" />
+        </div>
+      );
+    },
+    cell: ({ row }) => <div className="capitalize text-start pl-8">{row.getValue("title")}</div>,
+  },
+  {
+    accessorKey: "category",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Variedad" />
+        </div>
+      );
+    },
+    cell: ({ row }) => {
+      const brand: Brand = row.getValue("brand");
+      return <div className="text-start">{brand ? brand.name : ""}</div>;
+    },
+  },
+  {
+    accessorKey: "brand",
+    header: ({ column }) => {
+      return (
+        <div className="flex justify-start">
+          <TableSortableHeader column={column} title="Rubro" />
+        </div>
+      );
+    },
+    cell: ({ row }) => {
+      const brand: Brand = row.getValue("brand");
+      return <div className="text-start">{brand ? brand.name : ""}</div>;
+    },
+  },
+  {
     accessorKey: "brand",
     header: ({ column }) => {
       return (
@@ -31,17 +70,6 @@ export const buildColumns = (): ColumnDef<Product>[] => [
       const brand: Brand = row.getValue("brand");
       return <div className="text-start">{brand ? brand.name : ""}</div>;
     },
-  },
-  {
-    accessorKey: "title",
-    header: ({ column }) => {
-      return (
-        <div className="flex justify-start">
-          <TableSortableHeader column={column} title="Titulo" />
-        </div>
-      );
-    },
-    cell: ({ row }) => <div className="capitalize text-start pl-8">{row.getValue("title")}</div>,
   },
   {
     accessorKey: "priceCost",

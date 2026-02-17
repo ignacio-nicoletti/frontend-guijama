@@ -1,4 +1,4 @@
-import { Package, Settings } from "lucide-react";
+import { Package, Receipt, Settings, User } from "lucide-react";
 import type { ElementType } from "react";
 
 export type NavigationItem = {
@@ -15,12 +15,38 @@ export const navigationItems: NavigationItem[] = [
     subMenu: [
       {
         title: "Crear",
-        url: "/product/create",
+        url: "/admin/product/create",
       },
       {
         title: "Listado",
-        url: "/admin/products",
-        childs: [{ url: "/product/edit" }],
+        url: "/admin/product",
+        childs: [{ url: "/admin/product/edit" }],
+      },
+    ],
+  },
+  {
+    menu: "Clientes",
+    menuIcon: User,
+    subMenu: [
+      {
+        title: "Crear",
+        url: "/admin/client/create",
+      },
+      {
+        title: "Listado",
+        url: "/admin/client",
+        childs: [{ url: "/admin/product/edit" }],
+      },
+    ],
+  },
+  {
+    menu: "Ventas",
+    menuIcon: Receipt,
+    subMenu: [
+      {
+        title: "Listado",
+        url: "/admin/sell",
+        childs: [{ url: "/admin/product/edit" }],
       },
     ],
   },
@@ -29,29 +55,24 @@ export const navigationItems: NavigationItem[] = [
     menu: "Configuración",
     menuIcon: Settings,
     subMenu: [
-      //   {
-      //     title: "Sucursales",
-      //     url: "/branch",
-      //     childs: [{ url: "/branch/create" }, { url: "/branch/edit" }],
-      //   },
-      {
-        title: "Rubros",
-        url: "/admin/configuration/category",
-        childs: [{ url: "/category/create" }, { url: "/category/edit" }],
-      },
       {
         title: "Marcas",
         url: "/admin/configuration/brand",
         childs: [{ url: "/brand/create" }, { url: "/brand/edit" }],
       },
       {
-        title: "Proveedores",
-        url: "/admin/configuration/supplier",
-        childs: [{ url: "/supplier/create" }, { url: "/supplier/edit" }],
+        title: "Rubros",
+        url: "/admin/configuration/category",
+        childs: [{ url: "/category/create" }, { url: "/category/edit" }],
       },
       {
-        title: "Clientes",
-        url: "/admin/configuration/client",
+        title: "Sucursales",
+        url: "/branch",
+        childs: [{ url: "/branch/create" }, { url: "/branch/edit" }],
+      },
+      {
+        title: "Proveedores",
+        url: "/admin/configuration/supplier",
         childs: [{ url: "/supplier/create" }, { url: "/supplier/edit" }],
       },
     ],

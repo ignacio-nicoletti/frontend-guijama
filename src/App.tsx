@@ -1,12 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import ConfigurationLayout from "./components/layout/configuration-layout";
-import {
-  ClientsPage,
-  ConfigurationPage,
-  ProductPage,
-  SellsPage,
-  SupplierPage,
-} from "./pages/admin";
+import { ClientsPage, ConfigurationPage, ProductPage, SellsPage } from "./pages/admin";
 import {
   ConfigurationBrandPage,
   ConfigurationCategoryPage,
@@ -26,7 +20,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
 
       <Route
-        path="/admin/products"
+        path="/admin/product"
         element={
           <PrivateRoute>
             <ProductPage />
@@ -35,7 +29,7 @@ function App() {
       />
 
       <Route
-        path="/admin/clients"
+        path="/admin/client"
         element={
           <PrivateRoute>
             <ClientsPage />
@@ -44,7 +38,7 @@ function App() {
       />
 
       <Route
-        path="/admin/sells"
+        path="/admin/sell"
         element={
           <PrivateRoute>
             <SellsPage />
@@ -52,18 +46,10 @@ function App() {
         }
       />
 
-      <Route
-        path="/admin/suppliers"
-        element={
-          <PrivateRoute>
-            <SupplierPage />
-          </PrivateRoute>
-        }
-      />
-
       <Route path="/admin/configuration" element={<ConfigurationLayout />}>
         <Route index element={<ConfigurationPage />} />
         <Route path="brand" element={<ConfigurationBrandPage />} />
+        <Route path="branch" element={<ConfigurationBrandPage />} />
         <Route path="category" element={<ConfigurationCategoryPage />} />
         <Route path="supplier" element={<ConfigurationSupplierPage />} />
         <Route path="client" element={<ConfigurationClientPage />} />
