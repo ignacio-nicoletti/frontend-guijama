@@ -9,14 +9,8 @@ export const ClientList = () => {
 
   return (
     <div className="w-full flex flex-col gap-4 px-8">
-      {/* 🔥 Suspense para los filtros */}
-      {/* <ErrorBoundary fallback={<div>❌ Error cargando filtros</div>}> */}
-      <Suspense fallback={<div>Cargando filtros...</div>}>
-        <ClientFiltersForm />
-      </Suspense>
-      {/* </ErrorBoundary> */}
+      <ClientFiltersForm />
 
-      {/* 🔥 Suspense independiente para la tabla */}
       {filters && (
         <Suspense fallback={<TableSkeleton columns={5} rows={8} />}>
           <ClientTable filters={filters} />

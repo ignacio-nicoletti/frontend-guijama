@@ -62,7 +62,7 @@ export const buildClientColumns = (): ColumnDef<Client>[] => [
         </div>
       );
     },
-    cell: ({ row }) => <div className="capitalize text-start pl-8">{row.getValue("email")} $</div>,
+    cell: ({ row }) => <div className="capitalize text-start pl-8">{row.getValue("email")}</div>,
   },
 
   {

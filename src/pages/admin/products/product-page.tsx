@@ -1,3 +1,4 @@
+import { ErrorBoundary, ErrorFallback } from "@/components/error-boundary";
 import { Suspense } from "react";
 import Layout from "../../../components/layout/layout";
 import { GenericSkeleton } from "../../../components/skeletons/generic-skeleton";
@@ -6,19 +7,22 @@ import { ProductList } from "./components/product-list";
 export function ProductPage() {
   return (
     <Layout>
-      <div
-        className="flex flex-col z-10  min-h-full min-w-full bg-cover bg-center bg-no-repeat  items-center gap-4 rounded-lg shadow-lg"
-        style={{ backgroundImage: "url('./src/assets/backgroundLogin.svg')" }}
+      <ErrorBoundary
+        fallback={(error, resetError) => (
+          <ErrorFallback
+            error={error}
+            resetError={resetError}
+            title="Error al cargar productos"
+            description="No se pudieron cargar los productos. Por favor, intente nuevamente."
+            resetQueryKey="products"
+          />
+        )}
+        showToast={false}
       >
-        {/* <SubNavbarItem /> */}
-        <div className="bg-secondary w-full text-center py-2">
-          <p className="text-3xl text-white font-semibold">Listado de productos</p>
-        </div>
-
         <Suspense fallback={<GenericSkeleton />}>
           <ProductList />
         </Suspense>
-      </div>
+      </ErrorBoundary>
     </Layout>
   );
 }

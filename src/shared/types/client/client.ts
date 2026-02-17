@@ -1,9 +1,12 @@
 // shared/types/product.ts
 
 export type Client = {
-  id: number; // Cambiado de string a number (serial es número)
+  id: number;
   firstName: String;
   lastName: String;
+  DNI: string;
+  phone: string;
+  email: string;
   createdAt?: string | Date;
   updatedAt?: string | Date;
 };

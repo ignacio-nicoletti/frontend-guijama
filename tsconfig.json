@@ -25,6 +25,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@shared/*": ["src/shared/*"],
+      "@schemas/*": ["src/shared/schemas"],
       "@shared/types": ["src/shared/types"],
       "@shared/types/*": ["src/shared/types/*"]
     },
