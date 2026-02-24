@@ -15,7 +15,6 @@ import { ClientFormFields } from "../components/client-form-fields";
 export default function ClientCreatePage() {
   const { apiRequest } = useApiRequest<ClientUpsertRequest>();
   const [isPending, startTransition] = useTransition();
-
   const navigate = useNavigate();
 
   const form = useForm<ClientFormType>({
@@ -49,17 +48,17 @@ export default function ClientCreatePage() {
           successMessage: "Cliente creado correctamente!",
           errorMessage: "Ocurrió un problema al crear el Cliente.",
         });
-        navigate("/client");
+        navigate("/admin/client");
       } catch (error) {
         console.error("Failed to create client:", error);
       }
     });
   }
+
   return (
     <Layout>
       <CustomCard
         title="Crear cliente"
-        showButton={true}
         content={
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

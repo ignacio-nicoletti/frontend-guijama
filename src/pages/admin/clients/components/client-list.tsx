@@ -8,7 +8,7 @@ export const ClientList = () => {
   const { filters } = useClientFilters();
 
   return (
-    <div className="w-full flex flex-col gap-4 px-8">
+    <div className="w-full flex flex-col gap-4">
       <ClientFiltersForm />
 
       {filters && (

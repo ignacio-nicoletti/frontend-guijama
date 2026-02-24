@@ -61,8 +61,7 @@ export const ClientFormFields = () => {
       </div>
 
       <div className="flex items-center gap-4">
-        <Separator orientation="vertical" className="h-18" />
-        <div className="flex-1">
+        <div className="w-[32%]">
           <CustomFormField
             name="notes"
             label="Notas"
@@ -70,6 +69,7 @@ export const ClientFormFields = () => {
             disabled={isView}
           />
         </div>
+        <Separator orientation="vertical" className="h-18" />
       </div>
     </>
   );

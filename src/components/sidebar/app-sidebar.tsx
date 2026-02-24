@@ -8,7 +8,7 @@ export function AppSideBar(): ReactElement {
 
   return (
     <>
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" variant="sidebar">
         <AppSideBarHeader />
         <AppSideBarContent />
       </Sidebar>

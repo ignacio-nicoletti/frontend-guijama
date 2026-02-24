@@ -1,16 +1,12 @@
 import { Outlet } from "react-router-dom";
-import { AppSideBar } from "../sidebar/app-sidebar";
-import { SidebarProvider } from "../ui/sidebar";
+import Layout from "./layout"; // Tu layout principal
 
 export default function ConfigurationLayout() {
   return (
-    <div className="flex min-h-screen">
-      <SidebarProvider>
-        <AppSideBar />
-      </SidebarProvider>
-      <main className="flex-1 p-4">
+    <Layout>
+      <div className="flex flex-col gap-4">
         <Outlet />
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 }
