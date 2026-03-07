@@ -1,6 +1,5 @@
-// frontend/src/hooks/use-products.ts
 import { Client, ClientsResponse } from "@/shared/types/client/client";
-import { FilterClientSearch } from "@/shared/types/table/filter";
+import { FilterClientSearch } from "@/shared/types/filter-search";
 import { useQuery } from "@tanstack/react-query";
 import { fetchEntities } from "../../../lib";
 import { buildQueryString } from "../../../utils/query-params";

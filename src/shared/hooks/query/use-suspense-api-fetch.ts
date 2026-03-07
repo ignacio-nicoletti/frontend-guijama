@@ -9,7 +9,7 @@ interface UseSuspenseApiFetchOptions<T, R> {
 }
 
 export const useSuspenseApiFetch = <T, R = T>(options: UseSuspenseApiFetchOptions<T, R>) => {
-  const { data } = useSuspenseQuery({
+  const { data, isLoading, error, refetch } = useSuspenseQuery({
     queryKey: options.queryKey,
     queryFn: () => fetchEntities<T>(options.resourceUrl),
     select: options.select,
@@ -17,5 +17,8 @@ export const useSuspenseApiFetch = <T, R = T>(options: UseSuspenseApiFetchOption
 
   return {
     entity: data as R,
+    isLoading: isLoading,
+    error: error,
+    refetch: refetch,
   };
 };

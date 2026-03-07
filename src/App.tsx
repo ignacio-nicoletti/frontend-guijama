@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import ConfigurationLayout from "./components/layout/configuration-layout";
 import { ClientsPage, ConfigurationPage, ProductPage, SellsPage } from "./pages/admin";
 import ClientCreatePage from "./pages/admin/clients/views/client-create-page";
+import ClientEditPage from "./pages/admin/clients/views/client-edit-page";
+import ClientViewPage from "./pages/admin/clients/views/client-view-page";
 import {
   ConfigurationBrandPage,
   ConfigurationCategoryPage,
@@ -37,6 +39,8 @@ function App() {
           }
         />
         <Route path="create" element={<ClientCreatePage />} />
+        <Route path="edit/:id" element={<ClientEditPage />} />
+        <Route path="view/:id" element={<ClientViewPage />} />
       </Route>
 
       <Route

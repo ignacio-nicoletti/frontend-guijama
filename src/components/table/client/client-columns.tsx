@@ -1,6 +1,6 @@
 "use client";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil } from "lucide-react";
+import { Eye, Pencil } from "lucide-react";
 
 import { Client } from "@/shared/types/client/client";
 import { useNavigate } from "react-router-dom";
@@ -70,10 +70,14 @@ export const buildClientColumns = (): ColumnDef<Client>[] => [
     enableHiding: false,
     cell: ({ row }) => {
       const router = useNavigate();
-      const product = row.original;
+      const client = row.original;
 
       const handleEdit = () => {
-        router(`/admin/product/edit/${product.id}`);
+        router(`/admin/client/edit/${client.id}`);
+      };
+
+      const handleView = () => {
+        router(`/admin/client/view/${client.id}`);
       };
 
       return (
@@ -86,6 +90,16 @@ export const buildClientColumns = (): ColumnDef<Client>[] => [
             onClick={handleEdit}
           >
             <Pencil size={16} />
+          </Button>
+
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            title="Ver detalle"
+            className="p-2 cursor-pointer hover:bg-gray-100"
+            onClick={handleView}
+          >
+            <Eye size={16} />
           </Button>
         </div>
       );

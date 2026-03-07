@@ -1,7 +1,7 @@
 import { Filter } from "@/shared/types";
 
 import { useGetAllClients } from "@/shared/hooks/query/client/use-suspense-get-all";
-import { FilterClientSearch } from "@/shared/types/table/filter";
+import { FilterClientSearch } from "@/shared/types/filter-search";
 import { DataTable } from "../data-table";
 import { buildClientColumns } from "./client-columns";
 

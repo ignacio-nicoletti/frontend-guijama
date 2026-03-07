@@ -8,7 +8,7 @@ import { ClientFormType, clientSchema } from "@/shared/schemas/client/client.sch
 import { ClientUpsertRequest } from "@/shared/types/client/client-request";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition } from "react";
-import { type FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ClientFormFields } from "../components/client-form-fields";
 
@@ -26,13 +26,12 @@ export default function ClientCreatePage() {
       phone: "",
       address: "",
       email: "",
-      birthDate: null,
-      taxCondition: undefined,
-      notes: "",
+      isView: false,
     },
   });
 
-  function onSubmit(values: FieldValues) {
+  function onSubmit(values: ClientFormType) {
+    // Tipo específico en lugar de FieldValues
     startTransition(async () => {
       try {
         await apiRequest({
@@ -43,7 +42,7 @@ export default function ClientCreatePage() {
             lastName: values.lastName,
             dni: values.dni,
             phone: values.phone,
-            email: values.email,
+            email: values.email || undefined,
           },
           successMessage: "Cliente creado correctamente!",
           errorMessage: "Ocurrió un problema al crear el Cliente.",
